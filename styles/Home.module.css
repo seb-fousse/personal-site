@@ -33,10 +33,6 @@
   animation: background-pan 20s linear infinite;
 }
 
-.option {
-  @apply py-4;
-}
-
 .option:hover {
   transition: .3s;
 }
