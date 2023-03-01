@@ -1,6 +1,6 @@
 import link from 'next/link'
 import Head from 'next/head'
-import PortfolioItem from '../components/PortfolioItem'
+import PortfolioItem from 'components/PortfolioItem'
 import useSWR from 'swr'
 
 // See link for info on client side data fetching
