@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-function PortfolioItem({ title, desc, href }) {
+export default function PortfolioItem({ title, desc, href }) {
 	return (
 		<div class="p-4 m-4 text-center">
 			<Link
@@ -14,5 +14,3 @@ function PortfolioItem({ title, desc, href }) {
 		</div>
 	);
 }
-
-export default PortfolioItem;
