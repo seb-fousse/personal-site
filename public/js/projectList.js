@@ -1,63 +1,63 @@
-[
+export const projects = [
   {
     "title": "Musing Man Winkle",
     "desc": "Audio-Visual Portrait Using StyleGAN2",
     "href": "/",
-    "tags": ["art", "tech"]
+    "tags": ["art", "tec"]
   },
   {
     "title": "Stereoscopic Images",
     "desc": "Nimslo & Nishika N8000",
     "href": "/",
-    "tags": ["photo"]
+    "tags": ["pho"]
   },
   {
     "title": "B&W Dark Room",
     "desc": "Self-Developed 35mm B&W Film",
     "href": "/",
-    "tags": ["photo"]
+    "tags": ["pho"]
   },
   {
     "title": "35mm Color Film",
-    "desc": "Analog Photography",
+    "desc": "Analog phography",
     "href": "/",
-    "tags": ["photo"]
+    "tags": ["pho"]
   },
   {
     "title": "Song Visualizers",
-    "desc": "StyleGAN2 Video Synced to Audio",
+    "desc": "StyleGAN2 vid Synced to Audio",
     "href": "/",
-    "tags": ["video", "tech"]
+    "tags": ["vid", "tec"]
   },
   {
-    "title": "Quick Video Edits",
+    "title": "Quick vid Edits",
     "desc": "Hi-8 Tape Recordings",
     "href": "/",
-    "tags": ["video"]
+    "tags": ["vid"]
   },
   {
     "title": "Spoons",
     "desc": "A Hand Carving Hobby",
     "href": "/",
-    "tags": ["objects"]
+    "tags": ["obj"]
   },
   {
     "title": "Coasters",
     "desc": "No Ring Stains",
     "href": "/",
-    "tags": ["objects"]
+    "tags": ["obj"]
   },
   {
     "title": "Side Table",
     "desc": "Beginner Attempt At Woodworking",
     "href": "/",
-    "tags": ["objects"]
+    "tags": ["obj"]
   },
   {
     "title": "Hiking With Dad",
     "desc": "2021 Hackathon Runner-Up",
     "href": "/",
-    "tags": ["tech"]
+    "tags": ["tec"]
   },
   {
     "title": "Paintings & Collages",
@@ -69,7 +69,7 @@
     "title": "BeanKrypt",
     "desc": "Steganography in Python & Flask",
     "href": "/",
-    "tags": ["tech"]
+    "tags": ["tec"]
   },
   {
     "title": "Spring Loaded",
@@ -77,4 +77,4 @@
     "href": "/",
     "tags": ["art"]
   } 
-]
+];
