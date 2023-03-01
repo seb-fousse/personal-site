@@ -3,10 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-  --color-light-primary: 251, 238, 228;
-  --color-dark-primary: 21, 21, 21;
-  }
+  :root {}
 }
 
 * {
@@ -18,7 +15,7 @@
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: rgb(var(--color-light-primary));
+  @apply bg-orange-100;
 }
 
 a {
@@ -26,7 +23,3 @@ a {
   text-decoration: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 500;
-  color: rgb(var(--color-dark-primary));
-}

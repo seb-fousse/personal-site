@@ -1,12 +1,4 @@
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
-  background-color: rgb(var(--color-light-primary));
-}
+/* CSS for spash-page name hover effect */
 
 .extra {
   display:inline-block;
@@ -30,5 +22,5 @@
   background-size: 1000%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: background-pan 20s linear infinite;
+  animation: background-pan 10s linear infinite;
 }
