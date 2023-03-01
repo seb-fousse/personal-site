@@ -7,15 +7,17 @@ function HomeMenuItem({ text, href }) {
 
     const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-    const letters = text.split("");
+    const letters = text.split(""); // Split text into array of characteres
     const lettersAndDelay = []
 
+    // Push an object to lettersAndDelay with a letter, random delay, and fixed delay
     for (let i = 0; i < letters.length; ++i) {
         let rd = `${rand(-5000, 0)}ms`
         let fd = `${i * 1000 }ms`
         lettersAndDelay.push({letter: letters[i], randomDelay: rd, fixedDelay: fd});
     }
 
+    // Build out JSX for each letter in the HomeMenuItem
     const letterItems = lettersAndDelay.map((item) =>
         <span class="outer">
             <span class="inner" style={{animationDelay: item.randomDelay}}>
