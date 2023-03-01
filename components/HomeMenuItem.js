@@ -19,9 +19,9 @@ function HomeMenuItem({ text, href }) {
 
     // Build out JSX for each letter in the HomeMenuItem
     const letterItems = lettersAndDelay.map((item) =>
-        <span class="outer">
-            <span class="inner" style={{animationDelay: item.randomDelay}}>
-                <span class="letter" style={{animationDelay: item.fixedDelay}}>{item.letter}</span>
+        <span className="outer">
+            <span className="inner" style={{animationDelay: item.randomDelay}}>
+                <span className="letter" style={{animationDelay: item.fixedDelay}}>{item.letter}</span>
             </span>
         </span>
     );
