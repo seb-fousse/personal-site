@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Projects() {
 	const [filtered, setFiltered] = useState([]);
-	const [activeTag, setActiveTag] = useState('all');
+	const [activeTag, setActiveTag] = useState('All');
 
 	useEffect(() => {
 		setFiltered(projects);
@@ -22,7 +22,9 @@ export default function Projects() {
 
 			<main className="container flex flex-col justify-center items-center align-middle p-24 min-h-full min-w-full bg-orange-100">
 				
-				<h1>Projects page</h1>
+				<h1 className="text-4xl font-bold mb-8">
+					Projects + Work + Hobbies
+				</h1>
 				<Filter projects={projects} setFiltered={setFiltered} activeTag={activeTag} setActiveTag={setActiveTag} />
 
 				<motion.div

@@ -3,78 +3,78 @@ export const projects = [
     "title": "Musing Man Winkle",
     "desc": "Audio-Visual Portrait Using StyleGAN2",
     "href": "/",
-    "tags": ["art", "tec"]
+    "tags": ["Art", "Tech"]
   },
   {
     "title": "Stereoscopic Images",
     "desc": "Nimslo & Nishika N8000",
     "href": "/",
-    "tags": ["pho"]
+    "tags": ["Photo"]
   },
   {
     "title": "B&W Dark Room",
     "desc": "Self-Developed 35mm B&W Film",
     "href": "/",
-    "tags": ["pho"]
+    "tags": ["Photo"]
   },
   {
     "title": "35mm Color Film",
     "desc": "Analog phography",
     "href": "/",
-    "tags": ["pho"]
+    "tags": ["Photo"]
   },
   {
     "title": "Song Visualizers",
-    "desc": "StyleGAN2 vid Synced to Audio",
+    "desc": "StyleGAN2 Video Synced to Audio",
     "href": "/",
-    "tags": ["vid", "tec"]
+    "tags": ["Video", "Tech"]
   },
   {
-    "title": "Quick vid Edits",
+    "title": "Quick Video Edits",
     "desc": "Hi-8 Tape Recordings",
     "href": "/",
-    "tags": ["vid"]
+    "tags": ["Video"]
   },
   {
     "title": "Spoons",
     "desc": "A Hand Carving Hobby",
     "href": "/",
-    "tags": ["obj"]
+    "tags": ["Objects"]
   },
   {
     "title": "Coasters",
     "desc": "No Ring Stains",
     "href": "/",
-    "tags": ["obj"]
+    "tags": ["Objects"]
   },
   {
     "title": "Side Table",
     "desc": "Beginner Attempt At Woodworking",
     "href": "/",
-    "tags": ["obj"]
+    "tags": ["Objects"]
   },
   {
     "title": "Hiking With Dad",
     "desc": "2021 Hackathon Runner-Up",
     "href": "/",
-    "tags": ["tec"]
+    "tags": ["Tech"]
   },
   {
     "title": "Paintings & Collages",
     "desc": "Acrylic & Mixed Mediums",
     "href": "/",
-    "tags": ["art"]
+    "tags": ["Art"]
   },
   {
     "title": "BeanKrypt",
     "desc": "Steganography in Python & Flask",
     "href": "/",
-    "tags": ["tec"]
+    "tags": ["Tech"]
   },
   {
     "title": "Spring Loaded",
     "desc": "Mental Health Inspired Clothing Brand",
     "href": "/",
-    "tags": ["art"]
+    "tags": ["Art"]
   } 
 ];
