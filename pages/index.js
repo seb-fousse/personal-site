@@ -31,6 +31,7 @@ export default function Home() {
 
           <div className="splash-image">
             <figure>
+              {/* Look into alternatives for blur, standard doesn't work on GIFS */}
               <Image
                 src="/gifs/face-morph-optimized.gif"
                 blurDataURL="/gifs/face-morph-blur.png"
