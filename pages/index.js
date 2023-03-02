@@ -32,7 +32,9 @@ export default function Home() {
           <div className="splash-image">
             <figure>
               <Image
-                src="/gifs/face-morph.gif"
+                src="/gifs/face-morph-optimized.gif"
+                blurDataURL="/gifs/face-morph-blur.png"
+                placeholder="blur"
                 width={750} height={750}
                 alt="Morphing self portrait" />
             </figure>
