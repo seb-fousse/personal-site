@@ -24,8 +24,7 @@ function Filter({ projects, setFiltered, activeTag, setActiveTag }) {
           className="mx-1 my-2 p-2 items-center flex flex-col"
           onClick={() => setActiveTag(tag)}
           tabIndex={0}
-          key={tag}
-        >
+          key={tag}>
 
           <div className="cursor-pointer">
             {tag}

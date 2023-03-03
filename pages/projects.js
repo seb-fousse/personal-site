@@ -20,11 +20,21 @@ export default function Projects() {
 			<Head>
 			</Head>
 
-			<main className="container flex flex-col justify-center items-center align-middle p-24 min-h-full min-w-full bg-orange-100">
+			<main className="container flex flex-col justify-center items-center align-middle p-4 md:p-16 lg:p-16 xl:p-24 2xl:p-24 min-h-full min-w-full bg-orange-100">
 				
-				<h1 className="text-4xl font-bold mb-8">
-					Projects + Work + Hobbies
-				</h1>
+				<div className="text-4xl text-neutral-800 font-bold mb-8 cursor-default">
+					<span>
+						Projects
+					</span>
+					&nbsp;+&nbsp; 
+					<span>
+						Work
+					</span>
+					&nbsp;+&nbsp; 
+					<span>
+						Hobbies
+					</span> 
+				</div>
 				<Filter projects={projects} setFiltered={setFiltered} activeTag={activeTag} setActiveTag={setActiveTag} />
 
 				<motion.div
