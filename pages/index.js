@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Script from 'next/script'
 import Link from 'next/link'
-import splashImage from '@/public/face-morph.webp'
+import splashImage from '@/public/splashImage.webp'
 import styles from '@/styles/Home.module.css'
 import HomeMenuItem from '@/components/HomeMenuItem'
 
@@ -37,6 +37,7 @@ export default function Home() {
                 src={splashImage}
                 placeholder="blur"
                 width={750} height={750}
+                priority
                 alt="Morphing self portrait" />
             </figure>
           </div>
