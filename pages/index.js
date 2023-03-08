@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Script from 'next/script'
 import Link from 'next/link'
+import splashImage from '@/public/face-morph.webp'
 import styles from '@/styles/Home.module.css'
 import HomeMenuItem from '@/components/HomeMenuItem'
 
@@ -33,8 +34,7 @@ export default function Home() {
             <figure>
               {/* Look into alternatives for blur, standard doesn't work on GIFS */}
               <Image
-                src="/gifs/face-morph-optimized.gif"
-                blurDataURL="/gifs/face-morph-blur.png"
+                src={splashImage}
                 placeholder="blur"
                 width={750} height={750}
                 alt="Morphing self portrait" />
@@ -54,10 +54,10 @@ export default function Home() {
 
             <div className="menu space-y-4 md:space-y-8 lg:space-y-8 xl:space-y-8 2xl:space-y-8 font-medium text-4xl md:text-4xl lg:text-4xl xl:text-4xl 2xl:text-6xl">
 
-              <HomeMenuItem text="*projects" href="/projects"></HomeMenuItem>
-              <HomeMenuItem text="*about" href="/about"></HomeMenuItem>
-              <HomeMenuItem text="*email" href="mailto:me@sebf.xyz"></HomeMenuItem>
-              <HomeMenuItem text="*instagram" href="https://www.instagram.com/sebf.xyz/"></HomeMenuItem>
+              <HomeMenuItem text="*about" href="/"></HomeMenuItem>
+              <HomeMenuItem text="*projects" href="/"></HomeMenuItem>
+              <HomeMenuItem text="*hobbies" href="/"></HomeMenuItem>
+              <HomeMenuItem text="*contact" href="/"></HomeMenuItem>
 
             </div>
           </div>
