@@ -3,7 +3,9 @@ import Link from "next/link";
 
 import styles from './HomeMenuItem.module.css'
 
-function HomeMenuItem({ text, href }) {
+// Reworking of this effect
+// https://www.youtube.com/watch?v=owpaafxvkjU
+function HomeMenuItem({ text, href, onClick }) {
 
     const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -28,7 +30,7 @@ function HomeMenuItem({ text, href }) {
 
     return (
         <div className={styles.option}>
-            <Link className={styles.fancy} href={href}>
+            <Link className={styles.fancy} href={href} onClick={onClick}>
                 {letterItems}
             </Link>
         </div>
