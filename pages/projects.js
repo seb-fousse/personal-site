@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import PortfolioItem from '@/components/PortfolioItem'
 import Filter from '@/components/Filter'
+import NavMenu from '@/components/nav/NavMenu'
 import { projects } from '@/public/js/projectList'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -17,10 +18,13 @@ export default function Projects() {
 
 	return (
 		<>
+
+			<NavMenu />
 			<Head>
 			</Head>
 
-			<main className="container flex flex-col justify-center items-center align-middle p-4 md:p-16 lg:p-16 xl:p-24 2xl:p-24 min-h-full min-w-full bg-orange-100">
+
+			<main className="container flex flex-col justify-center items-center align-top p-4 md:p-16 lg:p-16 xl:p-24 2xl:p-24 min-h-full min-w-full bg-orange-100">
 				
 				<div className="text-4xl text-neutral-800 font-bold mb-8 cursor-default">
 					<span>
