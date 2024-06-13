@@ -52,7 +52,7 @@ export default function Home() {
                   <figure>
                     <Image
                       src={splashImage}
-                      placeholder="blur"
+                      placeholder="empty" // TODO: Fix placeholder with something nicer than an empty image
                       width={750} height={750}
                       priority
                       alt="Morphing self portrait" />
