@@ -1,0 +1,37 @@
+[
+  {
+    "firstName": "Vincent",
+    "lastName": "Vega",
+    "email": "vincent.vega@pulp.org",
+    "subject": "Re: Quarter Pounder With Cheese",
+    "message": "They call it a Royale with cheese."
+  },
+  {
+    "firstName": "Gandalf",
+    "lastName": "the Grey",
+    "email": "shallnotpass@shire.biz",
+    "subject": "On Punctuality",
+    "message": "A wizard is never late, nor is he early, he arrives precisely when he means to."
+  },
+  {
+    "firstName": "Regina",
+    "lastName": "George",
+    "email": "regina.g@burnbook.net",
+    "subject": "Re: Fetch",
+    "message": "Gretchen, stop trying to make fetch happen. It's not going to happen."
+  },
+  {
+    "firstName": "Jack",
+    "lastName": "Sparrow",
+    "email": "j.sparrow@pirates.com",
+    "subject": "X marks the spot",
+    "message": "Not all treasure is silver and gold, mate."
+  },
+  {
+    "firstName": "The",
+    "lastName": "Dude",
+    "email": "jeff.lebowski@dude.com",
+    "subject": "Re: Your opinion",
+    "message": "That's just, like, your opinion, man."
+  }
+]

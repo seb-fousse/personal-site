@@ -6,6 +6,12 @@
   :root {}
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-internal-autofill-selected {
+    transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

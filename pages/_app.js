@@ -1,10 +1,7 @@
 import '@/styles/globals.css'
-import { Roboto_Flex } from '@next/font/google'
+import { Roboto_Flex } from 'next/font/google'
 
- // import Font Awesome CSS
- import "@fortawesome/fontawesome-svg-core/styles.css";
- import { config } from "@fortawesome/fontawesome-svg-core";
- config.autoAddCss = false;
+require('dotenv').config();
 
 const robotoFlex = Roboto_Flex({ subsets: ['latin'] })
 

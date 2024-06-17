@@ -4,6 +4,7 @@ import SectionHeading from '@/components/SectionHeading'
 import HomeMenuItem from '@/components/HomeMenuItem'
 import splashImage from '@/public/splashImage.webp'
 import styles from '@/styles/Home.module.css'
+import ContactForm from '@/components/ContactForm'
 
 export default function Home() {
 
@@ -26,6 +27,9 @@ export default function Home() {
   return (
       <>
           <Head>
+
+            {/* TODO: Update header info */}
+
             {/* Primary Meta Tags */}
             <title>Seb Fousse</title>
             <meta name="title" content="Seb Fousse" />
@@ -52,7 +56,7 @@ export default function Home() {
                   <figure>
                     <Image
                       src={splashImage}
-                      placeholder="blur"
+                      placeholder="empty" // TODO: Consider making this placeholder nicer
                       width={750} height={750}
                       priority
                       alt="Morphing self portrait" />
@@ -67,7 +71,7 @@ export default function Home() {
                     </h1>
                     <h1>
                       Foussé
-                      </h1>
+                    </h1>
                   </div>
 
                   <div id="splash-menu-wrapper" className="menu-wrapper 2xl:block xl:block hidden">
@@ -85,37 +89,6 @@ export default function Home() {
             </section>
             <section id="about" className="min-h-screen">
               <SectionHeading heading="*about" />
-              <div className="grid gap-4 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1">
-                <div className="text-wrapper space-y-4 text-xl p-8">
-                  <p>
-                    I'm Seb Fousse, a software engineer and computer science student in New York City.
-                  </p> 
-                  <p>
-                    I am passionate about clean design, simple solutions, and discovering new perspectives.
-                  </p>
-                  <p>
-                    My values include adaptability, collaboration, creativity, curiosity, and gratitude.
-                  </p>
-                </div>
-                <div className="text-wrapper space-y-4 text-xl p-8">
-                  <div className="text-wrapper">
-                    <span className="font-bold">Languages:&nbsp;</span>
-                    <span>Python, Java, C++, Javascript, HTML/CSS</span>
-                  </div>
-                  <div className="text-wrapper">
-                    <span className="font-bold">Frameworks:&nbsp;</span>
-                    <span>React, NextJS, Flask, Django, TailwindCSS</span>
-                  </div>
-                  <div className="text-wrapper">
-                    <span className="font-bold">Libraries:&nbsp;</span>
-                    <span>pandas, scikit-learn, NumPy, Plotly, Framer Motion</span>
-                  </div>
-                  <div className="text-wrapper">
-                    <span className="font-bold">Tools:&nbsp;</span>
-                    <span>Git, VSCode, IntelliJ, Jupyter Notebook, Postman API, RunwayML, Photoshop, Final Cut Pro, Logic Pro</span>
-                  </div>
-                </div>
-              </div>
               {/* Resume button - https://www.npmjs.com/package/react-pdf */}
             </section>
             <section id="projects" className="min-h-screen">
@@ -126,6 +99,9 @@ export default function Home() {
             </section>
             <section id="contact" className="min-h-screen">
               <SectionHeading heading="*contact" />
+              <div className="mt-20">
+                <ContactForm />
+              </div>
             </section>
           </main>
       </>

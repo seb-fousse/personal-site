@@ -1,4 +1,3 @@
-import Home from "@/pages";
 import Link from "next/link";
 
 import styles from './HomeMenuItem.module.css'
