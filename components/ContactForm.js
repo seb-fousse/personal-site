@@ -184,7 +184,7 @@ const ContactForm = () => {
           </div>
         </div>
         <div className="mt-10">
-          <button type="submit" className="block w-full rounded-sm bg-orange-600 px-3.5 py-2.5 text-center text-sm font-semibold text-orange-100 shadow-sm hover:bg-orange-500 focus:outline focus:outline-offset-2 focus:outline-orange-600">
+          <button type="submit" className="block w-full rounded-sm bg-orange-500 px-3.5 py-2.5 text-center text-sm font-semibold text-orange-100 shadow-sm hover:bg-orange-600 focus:outline focus:outline-offset-2 focus:outline-orange-600">
               Let's talk
             </button>
         </div>
