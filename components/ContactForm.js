@@ -1,9 +1,9 @@
 import * as postmark from "postmark";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion"
 import CONTACT_PLACEHOLDERS from "@/public/data/contact_placeholders.json";
 
-const ContactForm = () => {
-  const postmarkClient = new postmark.ServerClient(process.env.POSTMARK_SERVER_TOKEN);
+const ContactForm = ({ setEmailSentSuccess }) => {
   const [placeholder, setPlaceholder] = useState({});
   const [formData, setFormData] = useState({
     firstName: '',
@@ -30,7 +30,6 @@ const ContactForm = () => {
 
   const handleChange = (key, value) => {
     setFormData({ ...formData, [key]: value });
-    setFormErrors(validateForm());
   };
 
   const validateForm = () => {
@@ -67,8 +66,10 @@ const ContactForm = () => {
       return;
     }
 
+    // Can only submit email form every 10 seconds
+    if(submitted) return;
+
     setFormErrors({});
-    setSubmitted(false);
     setSubmitError('');
 
     try {
@@ -83,21 +84,26 @@ const ContactForm = () => {
       if (response.ok) {
         console.log('Email sent successfully');
         setSubmitted(true);
-        setFormData({
+        setEmailSentSuccess(true);
+        setTimeout(() => {
+          setSubmitted(false); 
+          setEmailSentSuccess(false);
+        }, 7000); // 7 seconds
+        setTimeout(() => setFormData({
           firstName: '',
           lastName: '',
           email: '',
           subject: '',
           message: ''
-        });
+        }, 7000))
       } else {
         const data = await response.json();
         setSubmitError(data.message || 'Failed to send email');
-        console.log('Error sending email: ' + submitError);
+        console.log('Error sending email: ', submitError);
       }
     } catch (error) {
       setSubmitError('Failed to send email');
-      console.log('Error sending email: ' + submitError)
+      console.log('Error sending email: ', submitError, error);
     }
   }
 
@@ -115,7 +121,7 @@ const ContactForm = () => {
                 value={formData.firstName}
                 onChange={(e) => handleChange('firstName', e.target.value)}
                 autoComplete="given-name"
-                className={`mt-1 block w-full px-3 py-2 border-2 ${formErrors.firstName ? 'border-red-500' : 'border-neutral-300'} rounded-sm focus:outline-none focus:ring-neutral-800 focus:border-neutral-800 sm:text-sm bg-orange-50 autofill:!bg-orange-50`}
+                className={`mt-1 block w-full px-3 py-2 border-2 ${formErrors.firstName ? 'border-red-500' : 'border-neutral-300'} rounded-sm focus:outline-none focus:ring-neutral-800 focus:border-neutral-800 sm:text-sm bg-orange-100 autofill:!bg-orange-100`}
                 placeholder={placeholder.firstName}
               />
               {formErrors.firstName && <p className="text-red-500 text-sm mt-1">{formErrors.firstName}</p>}
@@ -131,7 +137,7 @@ const ContactForm = () => {
                 value={formData.lastName}
                 onChange={(e) => handleChange('lastName', e.target.value)}
                 autoComplete="family-name" 
-                className="mt-1 block w-full px-3 py-2 border-2 border-neutral-300 rounded-sm focus:outline-none focus:ring-neutral-800 focus:border-neutral-800 sm:text-sm bg-orange-50"
+                className="mt-1 block w-full px-3 py-2 border-2 border-neutral-300 rounded-sm focus:outline-none focus:ring-neutral-800 focus:border-neutral-800 sm:text-sm bg-orange-100"
                 placeholder={placeholder.lastName}
               />
             </div>
@@ -146,7 +152,7 @@ const ContactForm = () => {
                 value={formData.email}
                 onChange={(e) => handleChange('email', e.target.value)}
                 autoComplete="email" 
-                className={`mt-1 block w-full px-3 py-2 border-2 ${formErrors.firstName ? 'border-red-500' : 'border-neutral-300'} rounded-sm focus:outline-none focus:ring-neutral-800 focus:border-neutral-800 sm:text-sm bg-orange-50`}
+                className={`mt-1 block w-full px-3 py-2 border-2 ${formErrors.firstName ? 'border-red-500' : 'border-neutral-300'} rounded-sm focus:outline-none focus:ring-neutral-800 focus:border-neutral-800 sm:text-sm bg-orange-100`}
                 placeholder={placeholder.email}
               />
               {formErrors.email && <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>}
@@ -161,7 +167,7 @@ const ContactForm = () => {
                 id="subject" 
                 value={formData.subject} 
                 onChange={(e) => handleChange('subject', e.target.value)}
-                className={`mt-1 block w-full px-3 py-2 border-2 ${formErrors.firstName ? 'border-red-500' : 'border-neutral-300'} rounded-sm focus:outline-none focus:ring-neutral-800 focus:border-neutral-800 sm:text-sm bg-orange-50`}
+                className={`mt-1 block w-full px-3 py-2 border-2 ${formErrors.firstName ? 'border-red-500' : 'border-neutral-300'} rounded-sm focus:outline-none focus:ring-neutral-800 focus:border-neutral-800 sm:text-sm bg-orange-100`}
                 placeholder={placeholder.subject}
               />
               {formErrors.subject && <p className="text-red-500 text-sm mt-1">{formErrors.subject}</p>}
@@ -176,7 +182,7 @@ const ContactForm = () => {
                 rows="4" 
                 value={formData.message} 
                 onChange={(e) => handleChange('message', e.target.value)}
-                className={`mt-1 block w-full px-3 py-2 border-2 ${formErrors.firstName ? 'border-red-500' : 'border-neutral-300'} rounded-sm focus:outline-none focus:ring-neutral-800 focus:border-neutral-800 sm:text-sm bg-orange-50`}
+                className={`mt-1 block w-full px-3 py-2 border-2 ${formErrors.firstName ? 'border-red-500' : 'border-neutral-300'} rounded-sm focus:outline-none focus:ring-neutral-800 focus:border-neutral-800 sm:text-sm bg-orange-100`}
                 placeholder={placeholder.message}>
               </textarea>
               {formErrors.message && <p className="text-red-500 text-sm mt-1">{formErrors.message}</p>}
@@ -184,12 +190,23 @@ const ContactForm = () => {
           </div>
         </div>
         <div className="mt-10">
-          <button type="submit" className="block w-full rounded-sm bg-orange-500 px-3.5 py-2.5 text-center text-sm font-semibold text-orange-100 shadow-sm hover:bg-orange-600 focus:outline focus:outline-offset-2 focus:outline-orange-600">
-              Let's talk
-            </button>
+          <motion.button 
+            type="submit" 
+            whileHover={{ 
+              scale: 1.05, 
+              backgroundColor: 'rgb(82, 82, 82)' }}
+            whileTap={{ 
+              scale: 0.95 
+            }}
+            transition={{
+              duration: 0.2
+            }}
+            className="block w-full rounded-sm bg-neutral-800 px-3.5 py-2.5 text-center text-sm font-semibold text-orange-100 shadow-sm"
+          >
+            Let's talk
+          </motion.button>
         </div>
       </form>
-      {submitted && <p className="text-neutral-800 font-semibold text-sm mt-3">Thanks for reaching out!</p>}
       {submitError && <p className="text-neutral-800 text-sm mt-3">
         <span className="font-bold">{submitError}</span>
         <span> - consider emailing directly at <a className="hover:underline hover:cursor-pointer" href="mailto:me@sebf.xyz">me@sebf.xyz</a></span>

@@ -5,8 +5,12 @@ import HomeMenuItem from '@/components/HomeMenuItem'
 import splashImage from '@/public/splashImage.webp'
 import styles from '@/styles/Home.module.css'
 import ContactForm from '@/components/ContactForm'
+import { useState } from 'react'
+import { motion } from "framer-motion"
 
 export default function Home() {
+
+  const [emailSentSuccess, setEmailSentSuccess] = useState(false);
 
   // https://reacthustle.com/blog/nextjs-scroll-to-element
   const handleScroll = (e) => {
@@ -34,14 +38,14 @@ export default function Home() {
             <title>Seb Fousse</title>
             <meta name="title" content="Seb Fousse" />
             <meta name="robots" content="index, follow" />
-            <meta name="description" content="Seb Fousse is a software engineer and CS student. His interests include coding, painting, photography, and more." />
+            <meta name="description" content="Sebastien Fousse is a software engineer. His interests include coding, art, photography, and more." />
             <meta name="author" content="Seb Fousse" />
             <meta name="keywords" content="seb, fousse, sebastien, sebastian, programming, portfolio, creative, art, design, software" />
             {/* Open Graph Tags */}
             <meta property="og:title" content="Seb Fousse" />
             <meta property="og:site_name" data-page-subject="true" content="Seb Fousse" />
             <meta property="og:url" content="https://sebf.xyz" />
-            <meta property="og:description" name="description" content="Seb Fousse is a software engineer and CS student. His interests include coding, painting, photography, and more." />
+            <meta property="og:description" name="description" content="Sebastien Fousse is a software engineer. His interests include coding, art, photography, and more." />
             <meta property="og:image" content="" /> {/* TODO: Add image content here */}
             {/* Favicon & Device Viewport */}
             <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -59,6 +63,7 @@ export default function Home() {
                       placeholder="empty" // TODO: Consider making this placeholder nicer
                       width={750} height={750}
                       priority
+                      unoptimized
                       alt="Morphing self portrait" />
                   </figure>
                 </div>
@@ -98,10 +103,22 @@ export default function Home() {
               <SectionHeading heading="*hobbies" />
             </section>
             <section id="contact" className="min-h-screen">
-              <SectionHeading heading="*contact" />
-              <div className="mt-20">
-                <ContactForm />
+              <div className={`transition-opacity duration-200 ${emailSentSuccess ? 'opacity-25' : 'opacity-100'} ease-linear`}>
+                <SectionHeading heading="*contact" />
+                <ContactForm setEmailSentSuccess={setEmailSentSuccess}/>
               </div>
+              {emailSentSuccess &&
+                <motion.div 
+                  className="text-neutral-800 font-bold text-9xl text-nowrap mt-3"
+                  initial={{ x: "calc(100vw -100px)", bottom: "-5vh", position: "fixed" }}
+                  animate={{ x: "calc(0vw - 2000px)" }}
+                  transition={{ duration: 10, type: "linear" }}
+                >
+                  {[...Array(10)].map((x, i) => 
+                    <p key={i}>Email sent, talk soon!</p>
+                  )}
+                </motion.div>
+              }
             </section>
           </main>
       </>

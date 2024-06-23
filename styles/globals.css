@@ -21,7 +21,7 @@ input:-internal-autofill-selected {
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  @apply bg-orange-100;
+  @apply bg-gradient-to-t from-orange-200 to-orange-100;
 }
 
 a {
