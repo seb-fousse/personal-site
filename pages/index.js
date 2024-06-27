@@ -1,16 +1,45 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Script from 'next/script'
 import SectionHeading from '@/components/SectionHeading'
 import HomeMenuItem from '@/components/HomeMenuItem'
 import splashImage from '@/public/splashImage.webp'
 import styles from '@/styles/Home.module.css'
 import ContactForm from '@/components/ContactForm'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from "framer-motion"
 
 export default function Home() {
 
   const [emailSentSuccess, setEmailSentSuccess] = useState(false);
+  const [recentlyPlayed, setRecentlyPlayed] = useState({});
+  const [currentWeather, setCurrentWeather] = useState({});
+
+  const getStatsFromAPI = async () => {
+    try {
+      const currentWeatherResponse = await fetch('api/stats/current-weather', { method: 'GET'});
+      const recentlyPlayedResponse = await fetch('api/stats/recently-played', { method: 'GET' });
+      if (currentWeatherResponse.ok) {
+        console.log('current-weather get successful');
+        const currentWeatherData = await currentWeatherResponse.json();
+        setCurrentWeather(currentWeatherData);
+        console.log(JSON.stringify(currentWeather));
+      }
+      if (recentlyPlayedResponse.ok) {
+        console.log('recently-played get successful');
+        const recentlyPlayedData = await recentlyPlayedResponse.json();
+        setRecentlyPlayed(recentlyPlayedData);
+        console.log(JSON.stringify(recentlyPlayed));
+      }
+    } catch (error) {
+      console.log('Error when attempting to fetch and parse data from API');
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getStatsFromAPI();
+  }, []);
 
   // https://reacthustle.com/blog/nextjs-scroll-to-element
   const handleScroll = (e) => {
@@ -26,7 +55,6 @@ export default function Home() {
       behavior: "smooth",
     });
   };
-
 
   return (
       <>
@@ -50,6 +78,7 @@ export default function Home() {
             {/* Favicon & Device Viewport */}
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/favicon.ico" />
+            <Script src="https://kit.fontawesome.com/78b45dab69.js" crossOrigin="anonymous" />
           </Head>
           <main className="max-w-7xl m-auto">
             {/* Nav here */}
@@ -57,15 +86,9 @@ export default function Home() {
               <div className="container mx-auto my-auto flex flex-row flex-wrap 2xl:justify-center xl:justify-center lg:justify-start md:justify-start sm:justify-start">
                 
                 <div id="splash-image-wrapper" className="p-4 mx-auto 2xl:mx-0 xl:mx-0">
-                  <figure>
-                    <Image
-                      src={splashImage}
-                      placeholder="empty" // TODO: Consider making this placeholder nicer
-                      width={750} height={750}
-                      priority
-                      unoptimized
-                      alt="Morphing self portrait" />
-                  </figure>
+                  <video src={"/splashImage.mp4"} width={750} height={750} loop autoPlay muted playsInline >
+                    Video could not be displayed
+                  </video>
                 </div>
                 
                 <div id="title-and-menu" className="absolute bottom-0 left-0 sm:relative text-neutral-800 px-4 md:px-4 lg:px-8 xl:px-8 2xl:px-8 lg:mx-28 xl:mx-0 2xl:mx-0">
@@ -95,6 +118,7 @@ export default function Home() {
             <section id="about" className="min-h-screen">
               <SectionHeading heading="*about" />
               {/* Resume button - https://www.npmjs.com/package/react-pdf */}
+              <i className="fa-solid fa-user"></i>
             </section>
             <section id="projects" className="min-h-screen">
               <SectionHeading heading="*projects" />

@@ -1,4 +1,29 @@
-
+function openWeatherIconToFontAwesome(iconCode) {
+	const code = iconCode.substring(0,2);
+	const day = iconCode.substring(2,3) == 'd';
+	switch (code) {
+		case '01':
+			return day ? 'fa-sun' : 'fa-moon';
+		case '02':
+			return day ? 'fa-cloud-sun' : 'fa-cloud-moon';
+		case '03':
+			return 'fa-cloud';
+		case '04':
+			return 'fa-cloud';
+		case '09':
+			return 'fa-cloud-showers-heavy';
+		case '10':
+			return day ? 'fa-cloud-sun-rain' : 'fa-cloud-moon-rain';
+		case '11':
+			return 'fa-cloud-bolt';
+		case '13':
+			return 'fa-snowflake';
+		case '50':
+			return 'fa-smog';
+		default:
+			return 'fa-meteor';
+	}
+}
 
 export default async function handler(req, res) {
 	if(req.method === "GET") {
@@ -11,22 +36,23 @@ export default async function handler(req, res) {
 			const response = await fetch(url);
 
 			if (!response.ok) {
-				if (response.status === 401) {
-					return res.status(401).json({ error: 'Unauthorized: Access token is missing or invalid' });
-				} else if (response.status === 403) {
-					return res.status(403).json({ error: 'Forbidden: You do not have the required permissions' });
-				} else if (response.status === 429) {
-					return res.status(429).json({ error: 'Too Many Requests: You have exceeded your rate limit' });
-				} else {
-					return res.status(response.status).json({ error: `Error: ${response.status} ${response.statusText}` });
-				}
+				return res.status(response.status).json({ error: `Error: ${response.status} ${response.statusText}` });
 			}
 
 			const weatherData = await response.json();
-			console.log('Weather API response:', weatherData);
-			return res.status(200).json(weatherData);
+			const dataTrimmed = {
+				"coord": weatherData.coord,
+				"temp": weatherData.main.temp,
+				"feels_like": weatherData.main.feels_like,
+				"icon": openWeatherIconToFontAwesome(weatherData.weather[0].icon),
+				"type": weatherData.weather[0].main,
+				"description": weatherData.weather[0].description,
+			}
+
+			console.log('Success fetching weather');
+			return res.status(200).json(dataTrimmed);
 		} catch (error) {
-			console.error('Error getting weather:', error.message);
+			console.error('Error fetching weather:', error.message);
 			return res.status(500).json({ error: 'Internal Server Error'})
 		}
 	} else {

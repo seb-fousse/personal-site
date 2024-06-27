@@ -32,39 +32,34 @@ async function recentlyPlayed(limit = 1) {
 
 
 export default async function handler(req, res) {
-  try {
-    const response = await recentlyPlayed(); // recently played defaults to returning the a single recently played song
-    
-    if (!response.ok) {
-      if (response.status === 401) {
-        return res.status(401).json({ error: 'Unauthorized: Access token is missing or invalid' });
-      } else if (response.status === 403) {
-        return res.status(403).json({ error: 'Forbidden: You do not have the required permissions' });
-      } else if (response.status === 429) {
-        return res.status(429).json({ error: 'Too Many Requests: You have exceeded your rate limit' });
-      } else {
+  if(req.method === "GET") {
+    try {
+      const response = await recentlyPlayed(); // recently played defaults to returning the a single recently played song
+      
+      if (!response.ok) {
         return res.status(response.status).json({ error: `Error: ${response.status} ${response.statusText}` });
       }
+
+      const { items } = await response.json();
+      
+      if (!items) {
+        return res.status(500).json({ error: 'Failed to retrieve recently played items' });
+      }
+
+      const tracks = items.map((e) => ({
+        title: e.track.name,
+        artist: e.track.artists.map((_artist) => _artist.name).join(", "),
+        url: e.track.external_urls.spotify,
+        coverImage: e.track.album.images[1],
+      }));
+
+      console.log('Success fetching recently played tracks');
+      return res.status(200).json(tracks.length == 1 ? tracks[0] : tracks);
+    } catch (error) {
+      console.error('Error fetching recently played tracks:', error.message);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
-
-    const { items } = await response.json();
-    
-    if (!items) {
-      return res.status(500).json({ error: 'Failed to retrieve recently played items' });
-    }
-
-    const tracks = items.map((e) => ({
-      title: e.track.name,
-      artist: e.track.artists.map((_artist) => _artist.name).join(", "),
-      url: e.track.external_urls.spotify,
-      coverImage: e.track.album.images[1],
-    }));
-
-    console.log(tracks);
-
-    return res.status(200).json(tracks);
-  } catch (error) {
-    console.error('Error fetching recently played tracks:', error.message);
-    return res.status(500).json({ error: 'Internal Server Error' });
+  } else {
+    return res.status(405).json({ message: 'Method not allowed'});
   }
 }
