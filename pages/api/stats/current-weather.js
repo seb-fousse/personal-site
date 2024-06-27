@@ -3,25 +3,25 @@ function openWeatherIconToFontAwesome(iconCode) {
 	const day = iconCode.substring(2,3) == 'd';
 	switch (code) {
 		case '01':
-			return day ? 'fa-sun' : 'fa-moon';
+			return day ? 'sun' : 'moon';
 		case '02':
-			return day ? 'fa-cloud-sun' : 'fa-cloud-moon';
+			return day ? 'cloud-sun' : 'cloud-moon';
 		case '03':
-			return 'fa-cloud';
+			return 'cloud';
 		case '04':
-			return 'fa-cloud';
+			return 'cloud';
 		case '09':
-			return 'fa-cloud-showers-heavy';
+			return 'cloud-showers-heavy';
 		case '10':
-			return day ? 'fa-cloud-sun-rain' : 'fa-cloud-moon-rain';
+			return day ? 'cloud-sun-rain' : 'cloud-moon-rain';
 		case '11':
-			return 'fa-cloud-bolt';
+			return 'cloud-bolt';
 		case '13':
-			return 'fa-snowflake';
+			return 'snowflake';
 		case '50':
-			return 'fa-smog';
+			return 'smog';
 		default:
-			return 'fa-meteor';
+			return 'meteor';
 	}
 }
 

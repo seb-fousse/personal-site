@@ -49,12 +49,12 @@ export default async function handler(req, res) {
       const tracks = items.map((e) => ({
         title: e.track.name,
         artist: e.track.artists.map((_artist) => _artist.name).join(", "),
-        url: e.track.external_urls.spotify,
+        href: e.track.external_urls.spotify,
         coverImage: e.track.album.images[1],
       }));
 
       console.log('Success fetching recently played tracks');
-      return res.status(200).json(tracks.length == 1 ? tracks[0] : tracks);
+      return res.status(200).json(tracks);
     } catch (error) {
       console.error('Error fetching recently played tracks:', error.message);
       return res.status(500).json({ error: 'Internal Server Error' });
