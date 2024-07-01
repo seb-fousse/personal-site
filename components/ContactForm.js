@@ -1,7 +1,7 @@
 import * as postmark from "postmark";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion"
-import CONTACT_PLACEHOLDERS from "@/public/data/contact_placeholders.json";
+import CONTACT_PLACEHOLDERS from "@/public/data/contact/placeholders.json";
 
 const ContactForm = ({ setEmailSentSuccess }) => {
   const [placeholder, setPlaceholder] = useState({});
