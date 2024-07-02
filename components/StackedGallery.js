@@ -1,5 +1,6 @@
 import { useAnimate } from "framer-motion";
 import { useRef, useEffect } from "react";
+import Image from "next/image"
 
 export default function StackedGallery({ title, data, rotationRange=3 }) {
   return (
@@ -7,7 +8,7 @@ export default function StackedGallery({ title, data, rotationRange=3 }) {
       rotationRange={rotationRange}
       data={data}
     >
-      <section className="grid h-screen w-full place-content-center bg-white">
+      <section className="grid h-screen w-full place-content-center bg-white cursor-default">
         <div className="items-center align-middle gap-2 text-neutral-800 text-wrap text-center m-24">
           <p className="text-xl font-bold uppercase">{title}</p>
           <p className="text-sm font-light lowercase">touch or click screen</p>
@@ -19,7 +20,7 @@ export default function StackedGallery({ title, data, rotationRange=3 }) {
 
 const ImageStack = ({
   children, 
-  data, // List of image sources with metadata (title, description, media, image src, alt)
+  data, // List of image sources with metadata (title, description, media, src, placeholderBlur, alt)
   rotationRange, // images will be rotated randomly between zero and rotationRange, alternating between negative and positive
 }) => {
   const [scope, animate] = useAnimate();
@@ -84,8 +85,11 @@ const ImageStack = ({
 
       {data.map((item, index) => (
         <div key={index}>
-          <img
-            className="pointer-events-none absolute max-h-[60vh] max-w-[80vw] object-cover opacity-0 bg-neutral-800"
+          <Image
+            className="pointer-events-none absolute max-h-[60vh] max-w-[80vw] object-contain opacity-0"
+            fill
+            placeholder="blur"
+            blurDataURL={item.blurPlaceholder}
             src={item.src}
             alt={item.alt}
             image-mouse-move-index={index}

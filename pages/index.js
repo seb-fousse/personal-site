@@ -75,8 +75,7 @@ export default function Home() {
                   <div id="splash-menu-wrapper" className="menu-wrapper 2xl:block xl:block hidden">
                     <div id="splash-menu" className="space-y-4 md:space-y-8 lg:space-y-8 xl:space-y-8 2xl:space-y-8 font-medium text-4xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
                       <HomeMenuItem text="*about" href="#about" onClick={handleScroll}></HomeMenuItem>
-                      <HomeMenuItem text="*projects" href="#projects" onClick={handleScroll}></HomeMenuItem>
-                      <HomeMenuItem text="*hobbies" href="#hobbies" onClick={handleScroll}></HomeMenuItem>
+                      <HomeMenuItem text="*work" href="#work" onClick={handleScroll}></HomeMenuItem>
                       <HomeMenuItem text="*contact" href="#contact" onClick={handleScroll}></HomeMenuItem>
                     </div>
                   </div>
@@ -88,11 +87,8 @@ export default function Home() {
               <CurrentWeather />
               <RecentlyPlayed />
             </section>
-            <section id="projects" className="min-h-screen">
-              <SectionHeading heading="*projects" />
-            </section>
-            <section id="hobbies" className="min-h-screen">
-              <SectionHeading heading="*hobbies" />
+            <section id="work" className="min-h-screen">
+              <SectionHeading heading="*work" />
             </section>
             <section id="contact" className="min-h-screen">
               <div className={`transition-opacity duration-200 ${emailSentSuccess ? 'opacity-25' : 'opacity-100'} ease-linear`}>
