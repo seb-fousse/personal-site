@@ -1,4 +1,4 @@
-import StackedGallery from '@/components/StackedGallery'
+import StackedGallery from '@/components/gallery/StackedGallery'
 import data from '@/public/data/work/art.json';
 
 export default function Art() {

@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import SectionHeading from '@/components/SectionHeading'
-import HomeMenuItem from '@/components/HomeMenuItem'
+import HomeMenuItem from '@/components/buttons/HomeMenuItem'
 import ContactForm from '@/components/ContactForm'
 import CurrentWeather from '@/components/CurrentWeather'
 import RecentlyPlayed from '@/components/RecentlyPlayed'
@@ -52,7 +52,7 @@ export default function Home() {
           </Head>
           <main className="max-w-7xl m-auto">
             {/* Nav here */}
-            <section id="splash" className="min-h-screen container sm:flex sm:mx-auto">
+            <section id="splash" className="min-h-dvh container sm:flex sm:mx-auto">
               <div className="container mx-auto my-auto flex flex-row flex-wrap 2xl:justify-center xl:justify-center lg:justify-start md:justify-start sm:justify-start">
                 
                 <div id="splash-image-wrapper" className="p-4 mx-auto 2xl:mx-0 xl:mx-0">
@@ -82,15 +82,15 @@ export default function Home() {
                 </div>
               </div>
             </section>
-            <section id="about" className="min-h-screen">
+            <section id="about" className="min-h-dvh">
               <SectionHeading heading="*about" />
               <CurrentWeather />
               <RecentlyPlayed />
             </section>
-            <section id="work" className="min-h-screen">
+            <section id="work" className="min-h-dvh">
               <SectionHeading heading="*work" />
             </section>
-            <section id="contact" className="min-h-screen">
+            <section id="contact" className="min-h-dvh">
               <div className={`transition-opacity duration-200 ${emailSentSuccess ? 'opacity-25' : 'opacity-100'} ease-linear`}>
                 <SectionHeading heading="*contact" />
                 <ContactForm setEmailSentSuccess={setEmailSentSuccess}/>

@@ -1,0 +1,100 @@
+[
+  {
+    "firstName": "Forrest",
+    "lastName": "Gump",
+    "email": "forrestgump@bench.com",
+    "subject": "Life Advice",
+    "message": "Life is like a box of chocolates, you never know what you're gonna get."
+  },
+  {
+    "firstName": "Rick",
+    "lastName": "Sanchez",
+    "email": "rickandsanchez@dimensionc137.com",
+    "subject": "Schwifty!",
+    "message": "Wubba lubba dub dub! Science is great!"
+  },
+  {  
+    "firstName": "Indiana",
+    "lastName": "Jones",
+    "email": "indy@archaeologist.org",
+    "subject": "Adventure Awaits!",
+    "message": "Hewwo there! I'm on a adventure, wanna join me?"
+  },
+  {
+    "firstName": "Tony",
+    "lastName": "Stark",
+    "email": "ironman@starkindustries.com",
+    "subject": "Suit Up!",
+    "message": "Hey there, genius billionaire playboy philanthropist here. Need a hand?"
+  },
+  {
+    "firstName": "Ellen",
+    "lastName": "Ripley",
+    "email": " EllenRipley@badasssurvivor.com",
+    "subject": "In space, no one can hear you scream",
+    "message": "Get to the airlock! Someone is imposter."  
+  },
+  {
+    "firstName": "Wall-E",
+    "lastName": "",
+    "email": "wall-e@earth.com",
+    "subject": "Beep Boop",
+    "message": "Hello there! I'm Wall-E. *Beep Bop* Do you like collecting stuff?"
+  },
+  {
+    "firstName": "Frodo",
+    "lastName": "Baggins",
+    "email": "frodo@shire.com",
+    "subject": "The Quest Begins",
+    "message": "Don't worry, Sam. We will take the One Ring back to Mordor and destroy it." 
+  },
+  {  
+    "firstName": "Lara",
+    "lastName": "Croft",
+    "email": "lara@tombraider.com",
+    "subject": "Hunting for clues",
+    "message": "Greetings, I'm on a quest to find ancient artifacts. You in?"
+  },
+  {
+    "firstName": "E.T.",
+    "lastName": "",
+    "email": "et@home.com",
+    "subject": "Phone Home",
+    "message": "I think I've found a friend who can help me go home."
+  },
+  {
+    "firstName": "Marty",
+    "lastName": "McFly",
+    "email": "marty@backtothefuture.com",
+    "subject": "Time Traveling DeLorean",
+    "message": "Hey, Doc! Guess what? I accidentally invented time travel!"
+  },  
+  {
+    "firstName": "Hermes",
+    "lastName": "Conrad",
+    "email": "hermes@apollo13.com",
+    "subject": "Houston, we have a problem",
+    "message": "Uh, yeah, about that. We've had a bit of a situation."
+  },
+ {
+    "firstName": "Ghost",
+    "lastName": "",
+    "email": "ghost@pottershouse.com",
+    "subject": "Cold Case",
+    "message": "I've been watching you. I know your secrets."
+  },
+  {
+    "firstName": "Captain",
+    "lastName": "America",
+    "email": "captain@america.com",
+    "subject": "Avengers Assemble!",
+    "message": "Need some help with justice and freedom? Assemble right away!"
+  },
+  {
+    "firstName": "Aang",
+    "lastName": "Monk",
+    "email": "aang@avatar.com",
+    "subject": "Air Nomad in need",
+    "message": "Hey there! I'm Aang, the Avatar. Peace and balance are calling."
+  }
+]

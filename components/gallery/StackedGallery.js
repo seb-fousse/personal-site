@@ -8,7 +8,7 @@ export default function StackedGallery({ title, data, rotationRange=3 }) {
       rotationRange={rotationRange}
       data={data}
     >
-      <section className="grid h-screen w-full place-content-center bg-white cursor-default">
+      <section className="grid h-dvh w-full place-content-center bg-white cursor-default">
         <div className="items-center align-middle gap-2 text-neutral-800 text-wrap text-center m-24">
           <p className="text-xl font-bold uppercase">{title}</p>
           <p className="text-sm font-light lowercase">touch or click screen</p>
@@ -32,10 +32,10 @@ const ImageStack = ({
   }, []);
 
   const handleMouseClick = (e) => {
-    renderNextImage();
+    nextImage();
   }
 
-  const renderNextImage = () => {
+  const nextImage = () => {
     const imageIndex = imageRenderCount.current % data.length;
     const selector = `[image-mouse-move-index="${imageIndex}"]`;
 
@@ -55,7 +55,7 @@ const ImageStack = ({
         transform: [
           `translate(-50%, -25%) scale(0.5) ${
             imageIndex % 2
-              ? `rotate(${rotation}deg)`
+            ? `rotate(${rotation}deg)`
               : `rotate(-${rotation}deg)`
           }`,
           `translate(-50%, -50%) scale(1) ${
@@ -75,10 +75,15 @@ const ImageStack = ({
     imageRenderCount.current = imageRenderCount.current + 1;
   };
 
+  const previousImage = () => {
+    if (imageRenderCount.current <= 0) return;
+    
+  }
+
   return (
     <div
       ref={scope}
-      className="relative overflow-hidden h-screen flex justify-center items-center"
+      className="relative overflow-hidden h-dvh flex justify-center items-center"
       onMouseDown={handleMouseClick}
     >
       {children}
