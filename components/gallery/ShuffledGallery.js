@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Children, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import resolveConfig from "tailwindcss/resolveConfig";
@@ -47,7 +47,6 @@ const ImageShuffle = ({ children, data, delay }) => {
   const [delayChildren, setDelayChildren] = useState(delay);
 
   useEffect(() => {
-    //let itemPositions = data.map(() => ({ x: 0, y: 0, z: 0 }));
 
     const mdBreakpoint = parseInt(fullConfig.theme.screens.md.slice(0, -2));
     const mdOrLarger = window.innerWidth >= mdBreakpoint;
@@ -170,37 +169,51 @@ const ImageShuffle = ({ children, data, delay }) => {
           </motion.div>
         ))}
       </motion.div>
-      {imageForModal ? (
-        <>
-          <div className="justify-center items-center flex flex-col fixed inset-0 z-[10001] p-16">
-            <button
-              className="absolute top-4 right-4 text-xl font-bold p-2"
-              onClick={() => {
-                setImageForModal(null);
-              }}
+      <AnimatePresence>
+        {imageForModal ? (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }} // Starting state for the animation
+              animate={{ opacity: 1 }} // Final state for the animation
+              exit={{ opacity: 0 }}    // Exit state for the animation
+              transition={{ duration: 0.2 }} // Animation duration
+              className="justify-center items-center flex flex-col fixed inset-0 z-[10001] p-16"
             >
-              &#x2715;
-            </button>
-            <Image
-              className="max-w-full max-h-full object-contain p-4 pointer-events-none"
-              width="1024"
-              height="1024"
-              src={imageForModal.src}
-              alt={imageForModal.alt}
-              placeholder="blur"
-              blurDataURL={imageForModal.blurPlaceholder}
+              <motion.button
+                className="absolute top-4 right-4 text-xl font-bold p-2"
+                onClick={() => {
+                  setImageForModal(null);
+                }}
+                whileHover={{rotate: -360}}
+                transition={{repeat: Infinity, duration: 4, ease: "linear"}}
+              >
+                &#x2715;
+              </motion.button>
+              <Image
+                className="max-w-full max-h-full object-contain p-4 pointer-events-none"
+                width="1024"
+                height="1024"
+                src={imageForModal.src}
+                alt={imageForModal.alt}
+                placeholder="blur"
+                blurDataURL={imageForModal.blurPlaceholder}
+              />
+              <div>
+                <span className="font-bold">{imageForModal.title} - </span>
+                <span className="font-normal">{imageForModal.tool}</span>
+              </div>
+              <div className="font-light">{imageForModal.description}</div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.75 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-[10000] bg-white"
             />
-            <div>
-              <span className="font-bold">{imageForModal.title} - </span>
-              <span className="font-normal">{imageForModal.tool}</span>
-            </div>
-            <div className="font-light">{imageForModal.description}</div>
-          </div>
-          <div
-            className="opacity-75 fixed inset-0 z-[10000] bg-gray-300"
-          />
-        </>
-      ) : null}
+          </>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 };
