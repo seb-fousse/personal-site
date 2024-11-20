@@ -1,35 +1,76 @@
 import { motion } from "framer-motion";
 import { Children, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import resolveConfig from "tailwindcss/resolveConfig";
+import tailwindConfig from "@/tailwind.config.js";
 
-export default function ShuffledGallery({ title, data }) {
+const fullConfig = resolveConfig(tailwindConfig);
+
+export default function ShuffledGallery({ title, subtitle, data, delay }) {
   return (
-    <ImageShuffle data={data}>
+    <ImageShuffle data={data} delay={delay}>
       <section className="grid h-dvh w-screen place-content-center bg-white cursor-default">
-        <div className="items-center align-middle gap-2 text-neutral-800 text-wrap text-center m-24">
-          <p className="text-xl font-bold uppercase">{title}</p>
+        <div className="items-center align-middle gap-2 text-wrap text-center m-24">
+          <p className="text-xl font-bold uppercase text-neutral-800">
+            {title}
+          </p>
+          <p className="lowercase font-light text-neutral-600">{subtitle}</p>
         </div>
       </section>
     </ImageShuffle>
   );
 }
 
-const ImageShuffle = ({ children, data }) => {
+function getRandomCoordinate(width, height, imageSize, padX, padY) {
+  console.log(padX, padY);
+  return {
+    x: Math.floor(Math.random() * (width - 2 * padX - imageSize) + padX),
+    y: Math.floor(Math.random() * (height - 2 * padY - imageSize) + padY),
+  };
+}
+
+function generateCoordinates(width, height, n, imageSize, padX, padY) {
+  let coordinates = [];
+
+  for (let i = 0; i < n; i++) {
+    let newCoord = getRandomCoordinate(width, height, imageSize, padX, padY);
+    coordinates.push(newCoord);
+  }
+
+  return coordinates;
+}
+
+const ImageShuffle = ({ children, data, delay }) => {
   const itemTransform = useRef("");
   const imageRenderCount = useRef(data.length);
-  const [imageIndexForModal, setImageIndexForModal] = useState(null);
+  const [imageForModal, setImageForModal] = useState(null);
+  const [delayChildren, setDelayChildren] = useState(delay);
 
   useEffect(() => {
-    const itemPositions = data.map(() => ({ x: 0, y: 0, z: 0 }));
-    const padX = window.innerWidth / 4;
-    const padY = window.innerHeight / 3;
-    itemPositions.current = data.map((item, index) => ({
-      x: `${Math.round(Math.random() * (window.innerWidth - padX))}px`,
-      y: `${Math.round(Math.random() * (window.innerHeight - padY))}px`,
+    //let itemPositions = data.map(() => ({ x: 0, y: 0, z: 0 }));
+
+    const mdBreakpoint = parseInt(fullConfig.theme.screens.md.slice(0, -2));
+    const mdOrLarger = window.innerWidth >= mdBreakpoint;
+    const imageSize = mdOrLarger ? 384 : 208; // TODO replace with pulling pixel size from config instead of hardcode
+
+    const padX = 16;
+    const padY = 16;
+    const coordinates = generateCoordinates(
+      window.innerWidth,
+      window.innerHeight,
+      data.length,
+      imageSize,
+      padX,
+      padY
+    );
+
+    let itemPositions = data.map((item, index) => ({
+      x: `${coordinates[index].x}px`,
+      y: `${coordinates[index].y}px`,
       z: index,
     }));
 
-    itemPositions.current.forEach((item, index) => {
+    itemPositions.forEach((item, index) => {
       const element = document.querySelector(
         `[data-draggable-item-index="${index}"]`
       );
@@ -61,60 +102,103 @@ const ImageShuffle = ({ children, data }) => {
     if (itemTransform.current == e.target.style.transform) {
       // If mouse down and mouse up happen at the same location
       console.log("clicked", index, itemTransform.current);
-      setImageIndexForModal(index);
+      setImageForModal(data[index]);
     } else {
       console.log("dragged", index);
     }
   };
 
+  // Define the stagger settings for the parent to the items
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: delayChildren,
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
+  // Define the animation for each item
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
   return (
-    <div className="relative overflow-hidden h-dvh flex justify-center items-center">
-      {Children.map(children, child =>
-        <div className={imageIndexForModal ? "blur" : ""}>
-          {child}
-        </div>
-      )}
-      {data.map((item, index) => (
-        <motion.div
-          className="absolute flex justify-center align-middle text-center cursor-pointer"
-          drag
-          key={index}
-          data-draggable-item-index={index}
-          onDragStart={handleDragStart}
-          onDragEnd={handleDragEnd}
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          dragMomentum={false}
-        >
-          <Image
-            className={`pointer-events-none object-contain ${imageIndexForModal ? "blur" : ""} md:max-w-96 md:max-h-96 max-w-52 max-h-52`}
-            width="1024"
-            height="1024"
-            src={item.src}
-            alt={item.alt}
-            placeholder="blur"
-            blurDataURL={item.blurPlaceholder}
-          />
-        </motion.div>
+    <div className="relative overflow-hidden h-dvh w-dvh flex justify-center items-center">
+      {Children.map(children, (child) => (
+        <div className={imageForModal ? "blur" : ""}>{child}</div>
       ))}
-      {imageIndexForModal ? (
-        <>
-          <div
-            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+      <motion.div
+        className="container"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {data.map((item, index) => (
+          <motion.div
+            className="absolute flex justify-center align-middle text-center cursor-pointer"
+            drag
+            key={index}
+            data-draggable-item-index={index}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            dragMomentum={false}
+            variants={itemVariants}
           >
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              {/*content change this to display image etc*/}
-              <button
-                className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                onClick={() => setImageIndexForModal(null)}
-              >
-                Cancel
-              </button>
-              {imageIndexForModal}
+            <Image
+              className={`pointer-events-none object-contain ${
+                imageForModal ? "blur" : ""
+              } md:max-w-96 md:max-h-96 max-w-52 max-h-52`}
+              width="1024"
+              height="1024"
+              src={item.src}
+              alt={item.alt}
+              placeholder="blur"
+              blurDataURL={item.blurPlaceholder}
+            />
+          </motion.div>
+        ))}
+      </motion.div>
+      {imageForModal ? (
+        <>
+          <div className="justify-center items-center flex flex-col fixed inset-0 z-[10001] p-16">
+            <button
+              className="absolute top-4 right-4 text-xl font-bold p-2"
+              onClick={() => {
+                setImageForModal(null);
+              }}
+            >
+              &#x2715;
+            </button>
+            <Image
+              className="max-w-full max-h-full object-contain p-4 pointer-events-none"
+              width="1024"
+              height="1024"
+              src={imageForModal.src}
+              alt={imageForModal.alt}
+              placeholder="blur"
+              blurDataURL={imageForModal.blurPlaceholder}
+            />
+            <div>
+              <span className="font-bold">{imageForModal.title} - </span>
+              <span className="font-normal">{imageForModal.tool}</span>
             </div>
+            <div className="font-light">{imageForModal.description}</div>
           </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          <div
+            className="opacity-75 fixed inset-0 z-[10000] bg-gray-300"
+          />
         </>
       ) : null}
     </div>
